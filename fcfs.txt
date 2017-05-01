@@ -1,0 +1,32 @@
+#!/usr/bin/python
+p=[]
+ft=[]
+wt=[]
+i=0
+j=0
+x=0
+n=int(raw_input('Enter the no. of Processes: '))
+
+for i in range(n):
+	p.append([])
+	p[i].append(input("Enter Process num: "))
+	p[i].append(int(input("Enter Process Arrival time: ")))
+	p[i].append(int(input("Enter Process Burst time: ")))
+
+p.sort(key=lambda p:p[1])
+
+print("Process#    Arrival Time     Burst Time")
+for i in range(n):
+	print p[i][0], '\t\t', p[i][1], '\t\t', p[i][2]
+	if i is 0:
+		wt.append(0)
+		ft.append((p[i][1]+p[i][2]))
+	else:
+		wt.append((ft[i-1] - p[i][1]))
+		ft.append((ft[i-1]+p[i][2]))
+
+print ("Process#    Waiting Time    Turn Arround Time")
+for j in range(n):
+	print p[j][0], '\t\t', wt[j], '\t\t', ft[j]-p[j][1]
+
+
